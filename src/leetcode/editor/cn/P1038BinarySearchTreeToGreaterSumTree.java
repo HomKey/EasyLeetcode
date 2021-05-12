@@ -58,16 +58,16 @@ public class P1038BinarySearchTreeToGreaterSumTree{
 class Solution {
     int sum = 0;
     public TreeNode bstToGst(TreeNode root) {
-
-        if (root != null){
-            bstToGst(root.right);
-            sum += root.val;
-            root.val = sum;
-            bstToGst(root.left);
-        }
+        sum(root);
         return root;
+    }
 
-
+    private void sum(TreeNode root){
+        if (root == null) return;
+        sum(root.right);
+        sum += root.val;
+        root.val = sum;
+        sum(root.left);
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
