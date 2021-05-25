@@ -75,12 +75,18 @@ public class P142LinkedListCycleIi {
         public ListNode detectCycle(ListNode head) {
             // 先判断有没有环，有环则算出相遇的节点
             if (head == null || head.next == null) return null;
-            ListNode slow = head, fast = head;
-            do {
-                if (fast == null || fast.next == null) return null;
-                slow = slow.next;
+            ListNode fast = head;
+            ListNode slow = head;
+            boolean hasCycle = false;
+            while (fast != null && fast.next != null){
                 fast = fast.next.next;
-            } while (slow != fast);
+                slow = slow.next;
+                if (fast == slow) {
+                    hasCycle = true;
+                    break;
+                }
+            }
+            if (!hasCycle) return null;
             fast = head;
             while( slow != fast ) {
                 slow = slow.next;
